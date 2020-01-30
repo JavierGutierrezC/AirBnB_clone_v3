@@ -17,6 +17,7 @@ from flask import request
                  strict_slashes=False)
 def get_review(place_id):
     """
+    Retrieves a list of review
     """
     if place_id is None:
         abort(404)
@@ -42,7 +43,7 @@ def get_review_id(review_id):
     return jsonify(reviewArr.to_dict())
 
 
-@app_views.route("reviews/<review_id>", methods=['DELETE'],
+@app_views.route("/reviews/<review_id>", methods=['DELETE'],
                  strict_slashes=False)
 def get_review_delete(review_id):
     """
