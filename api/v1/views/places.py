@@ -57,9 +57,9 @@ def get_place_delete(place_id):
 
 @app_views.route("/cities/<city_id>/places", methods=['POST'],
                  strict_slashes=False)
-def set_delete_POST(city_id):
+def set_places_POST(city_id):
     """
-    create Delete  object
+    create Post object
     """
     city = storage.get("City", city_id)
     if not city:
@@ -67,22 +67,24 @@ def set_delete_POST(city_id):
 
     if not request.get_json():
         return jsonify({"error": "Not a JSON"}), 400
-    if 'email' not in request.get_json():
+    if 'user_id' not in request.get_json():
         return jsonify({"error": "Missing user_id"}), 400
 
-    user_post = storage.get('User', request.json()['user_id'])
-    if not user:
+    user_post = storage.get('User', request.json['user_id'])
+    if not user_post:
         abort(404)
-    if 'name' not in request_get.json():
+    if 'name' not in request.get_json():
         return jsonify({"error": "Missing name"}), 400
 
-    n_place = Place(**request.json())
+    n_place = Place(user_id=request.json["user_id"],
+                    name=request.json["name"])
     n_place.city_id = city_id
-    new_place.save()
-    return jsonify(n_place.to_dict()), 201
+    storage.new(n_place)
+    storage.save()
+    return jsonify(n_place.to_dict()), 200
 
 
-@app_views.route('/users/<user_id>', methods=['PUT'],
+@app_views.route('/places/<place_id>', methods=['PUT'],
                  strict_slashes=False)
 def user_put_place(place_id):
     '''
@@ -93,10 +95,10 @@ def user_put_place(place_id):
         abort(404)
     if not request.json:
         return jsonify({"error": "Not a JSON"}), 400
-    for key, value in request.get_json().items():
-        if key not in ['id', 'created_at', 'updated_at']:
-            setattr(place, key, value)
-    place.save()
+    for atrr, value in request.get_json().items():
+        if atrr not in ['id', 'created_at', 'updated_at']:
+            setattr(place, atrr, value)
+    storage.save()
     return jsonify(place.to_dict()), 200
 
 
