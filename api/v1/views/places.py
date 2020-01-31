@@ -17,6 +17,7 @@ from flask import request
                  strict_slashes=False)
 def get_places(city_id):
     """
+    Obtain all cities and places
     """
     places_city = []
     if city_id is None:
@@ -32,7 +33,7 @@ def get_places(city_id):
                  strict_slashes=False)
 def get_places_id(place_id):
     """
-    Return id of the function
+    obtain object places by it's id
     """
     placeArr = storage.get("Place", place_id)
     if placeArr is None:
@@ -44,7 +45,7 @@ def get_places_id(place_id):
                  strict_slashes=False)
 def get_place_delete(place_id):
     """
-    method Delete of the function
+    Deletes an object
     """
     DelArr = storage.get('Place', place_id)
     if DelArr is None:
@@ -59,7 +60,7 @@ def get_place_delete(place_id):
                  strict_slashes=False)
 def set_places_POST(city_id):
     """
-    create Post object
+    Creates a new object
     """
     city = storage.get("City", city_id)
     if not city:
@@ -88,7 +89,7 @@ def set_places_POST(city_id):
                  strict_slashes=False)
 def user_put_place(place_id):
     '''
-        Update a Place object
+    Inserts a new item to an object
     '''
     place = storage.get('Place', place_id)
     if place is None:
