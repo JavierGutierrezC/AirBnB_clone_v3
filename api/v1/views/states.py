@@ -16,6 +16,7 @@ from flask import request
 @app_views.route('/states', methods=['GET'], strict_slashes=False)
 def get_task():
     """
+    Obtain all state objects in database
     """
     state_list = []
     for state in storage.all('State').values():
@@ -27,7 +28,7 @@ def get_task():
                  strict_slashes=False)
 def get_task_id(state_id):
     """
-    Return id of the function
+    Obtain all state objects by id
     """
     stateArr = storage.get("State", state_id)
     if stateArr is None:
@@ -39,7 +40,7 @@ def get_task_id(state_id):
                  strict_slashes=False)
 def get_task_delete(state_id):
     """
-    method Delete of the function
+    method Delete of an object
     """
     stateArr = storage.get('State', state_id)
     if stateArr is None:
@@ -53,7 +54,7 @@ def get_task_delete(state_id):
 @app_views.route("/states", methods=['POST'], strict_slashes=False)
 def set_task_POST():
     """
-    State object
+    Create a new State object
     """
     if not request.json:
         return jsonify({"error": "Not a JSON"}), 400
@@ -69,7 +70,7 @@ def set_task_POST():
                  strict_slashes=False)
 def set_task_PUT(state_id):
     """
-    method PUT
+    Insert an tem into state object
     """
     state = storage.get("State", state_id)
     if not request.json:
