@@ -29,7 +29,7 @@ def get_amenities_all():
                  strict_slashes=False)
 def get_amenity_id(amenity_id):
     """
-    Return id of the function
+    Return id of the Amenity function
     """
     amenityArr = storage.get("Amenity", amenity_id)
     if amenityArr is None:
@@ -41,7 +41,7 @@ def get_amenity_id(amenity_id):
                  strict_slashes=False)
 def get_amenity_delete(amenity_id):
     """
-    method Delete onject
+    method Delete object
     """
     DELArr = storage.get('Amenity', amenity_id)
     if DELArr is None:
@@ -55,7 +55,7 @@ def get_amenity_delete(amenity_id):
 @app_views.route("/amenities", methods=['POST'], strict_slashes=False)
 def get_amenity_POST():
     """
-    State object
+    Creates an Amenity object
     """
     if not request.json:
         return jsonify({"error": "Not a JSON"}), 400
@@ -70,7 +70,7 @@ def get_amenity_POST():
                  strict_slashes=False)
 def set_amenity_PUT(amenity_id):
     """
-    method PUT object
+    method PUT object into Amenity
     """
     amenity_st = storage.get('Amenity', amenity_id)
     if amenity_st is None:
