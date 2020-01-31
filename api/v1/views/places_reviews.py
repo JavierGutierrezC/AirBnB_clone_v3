@@ -73,15 +73,13 @@ def set_review_POST(place_id):
         abort((400), "Not a JSON")
     elif 'user_id' not in info:
         abort((400), "Missing user_id")
-    elif 'text' not in info:
-        abort((400), "Missing text")
     elif user is None:
         abort(404)
+    elif 'text' not in info:
+        abort((400), "Missing text")
     else:
         info["place_id"] = place_id
-        review_post = Review(text=request.json["text"],
-                             user_id=request.json["user_id"],
-                             place_id=place_id)
+        review_post = Review(**info)
         storage.new(review_post)
         storage.save()
         new_review = storage.get("Review", review_post.id)
