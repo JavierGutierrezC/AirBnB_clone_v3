@@ -55,7 +55,7 @@ def get_review_delete(review_id):
     else:
         storage.delete(reviewArr)
         storage.save()
-    return jsonify({}), 200
+    return make_response(jsonify({}), 200)
 
 
 @app_views.route("/places/<place_id>/reviews", methods=['POST'],
@@ -83,7 +83,7 @@ def set_review_POST(place_id):
         storage.new(review_post)
         storage.save()
         new_review = storage.get("Review", review_post.id)
-        return jsonify(new_review.to_dict()), 201
+        return make_response(jsonify(new_review.to_dict()), 201)
 
 
 @app_views.route("/reviews/<review_id>", methods=['PUT'],
@@ -103,7 +103,7 @@ def set_review_PUT(review_id):
              atriv != "user_id")):
             setattr(review_st, atriv, val)
     storage.save()
-    return jsonify(review_st.to_dict()), 200
+    return make_response(jsonify(review_st.to_dict()), 200)
 
 if __name__ == "__main__":
     app.run(host=host, port=port, threaded=True)
