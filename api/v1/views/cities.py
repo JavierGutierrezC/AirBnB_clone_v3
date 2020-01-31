@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-New view for CIty objects that handles taht handles all default ResFul API.
+New view for City objects that handles taht handles all default ResFul API.
 """
 
 
@@ -17,6 +17,7 @@ from flask import request
                  strict_slashes=False)
 def get_city(state_id):
     """
+    Method get to obtain all states
     """
     if state_id is None:
         abort(404)
@@ -34,7 +35,7 @@ def get_city(state_id):
                  strict_slashes=False)
 def get_city_id(city_id):
     """
-    Return id of the function
+    Obtain city object by its id
     """
     cityArr = storage.get("City", city_id)
     if cityArr is None:
@@ -46,7 +47,7 @@ def get_city_id(city_id):
                  strict_slashes=False)
 def get_city_delete(city_id):
     """
-    method Delete of the function
+    method Delete an object function
     """
     cityArr = storage.get('City', city_id)
     if cityArr is None:
@@ -61,7 +62,7 @@ def get_city_delete(city_id):
                  strict_slashes=False)
 def set_city_POST(state_id):
     """
-    State object
+    Create a new state object
     """
     state = storage.get("State", state_id)
     info = request.get_json()
@@ -84,7 +85,7 @@ def set_city_POST(state_id):
                  strict_slashes=False)
 def set_city_PUT(city_id):
     """
-    method PUT
+    Insert an item into a city object
     """
     city_st = storage.get("City", city_id)
     if not request.json:
