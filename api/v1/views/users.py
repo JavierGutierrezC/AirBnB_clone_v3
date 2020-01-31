@@ -16,6 +16,7 @@ from flask import request
 @app_views.route('/users', methods=['GET'], strict_slashes=False)
 def get_user():
     """
+    Obtain all user objects
     """
     user_list = []
     for user in storage.all('User').values():
@@ -27,7 +28,7 @@ def get_user():
                  strict_slashes=False)
 def get_user_id(user_id):
     """
-    Return id of the function
+    Obtain all users by id
     """
     userArr = storage.get("User", user_id)
     if userArr is None:
@@ -39,14 +40,12 @@ def get_user_id(user_id):
                  strict_slashes=False)
 def get_user_delete(user_id):
     """
-    method Delete of the function
+    method Delete user object
     """
     userArr = storage.get('User', user_id)
     if userArr is None:
-        print("entre al ifffffffffffffffffffffffff")
         abort(404)
     else:
-        print("entre al elseeeeeeeeeeeeeeeeeeeeeee")
         storage.delete(userArr)
         storage.save()
     return jsonify({}), 200
@@ -55,7 +54,7 @@ def get_user_delete(user_id):
 @app_views.route("/users", methods=['POST'], strict_slashes=False)
 def set_user_POST():
     """
-    User object
+    Create a new user
     """
     if not request.json:
         return jsonify({"error": "Not a JSON"}), 400
@@ -74,7 +73,7 @@ def set_user_POST():
                  strict_slashes=False)
 def set_user_PUT(user_id):
     """
-    method PUT
+    Insert element in user object
     """
     user = storage.get("User", user_id)
     if not request.json:
