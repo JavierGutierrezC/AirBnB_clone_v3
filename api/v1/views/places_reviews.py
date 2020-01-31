@@ -17,7 +17,7 @@ from flask import request
                  strict_slashes=False)
 def get_review(place_id):
     """
-    Retrieves a list of review
+    Retrieves a list of review objects
     """
     if place_id is None:
         abort(404)
@@ -62,7 +62,7 @@ def get_review_delete(review_id):
                  strict_slashes=False)
 def set_review_POST(place_id):
     """
-    Places object
+    Create a places object
     """
     place = storage.get("Place", place_id)
     info = request.get_json()
@@ -90,7 +90,7 @@ def set_review_POST(place_id):
                  strict_slashes=False)
 def set_review_PUT(review_id):
     """
-    method PUT
+    Insert an item into hte review object
     """
     review_st = storage.get("Review", review_id)
     if not request.json:
